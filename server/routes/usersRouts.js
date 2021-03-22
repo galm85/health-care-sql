@@ -64,4 +64,23 @@ router.delete('/:id',(req,res)=>{
 })
 
 
+//add apointment 
+router.post('/add-appointment/:id',(req,res)=>{
+    db.query(`SELECT * FROM users WHERE id='${req.params.id}'`,(err,result)=>{
+        if(err){
+            return res.status(400).sand(err);
+        }
+        
+        let user = result[0];
+        user.apointment = req.body;
+        
+        return res.send(user);
+        
+        db.query(`UPDATE users SET apointment='${apointment}' WHERE id=${req.params.id}`)
+        res.send('new appointment added');
+
+    })
+})
+
+
 module.exports = router;

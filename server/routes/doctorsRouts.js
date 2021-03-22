@@ -25,5 +25,10 @@ router.post('/',async(req,res)=>{
     })
 })
 
+//delete Doctor by id
+router.delete('/:id',(req,res)=>{
+    db.query(`DELETE FROM doctors WHERE id='${req.params.id}'`);
+})
+
 
 module.exports = router;

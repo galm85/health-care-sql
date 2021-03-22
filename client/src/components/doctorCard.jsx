@@ -1,8 +1,17 @@
 import React from 'react'
 import '../styles/components.css';
-
+import axios from 'axios';
 
 const DoctorCard = ({doctor}) => {
+
+
+    const setAppointment = async(id)=>{
+        let user = JSON.parse(localStorage.getItem('mediacalUser'));
+        const appointment = "new doctor meeting with doctor"+id;
+        await axios.post(`http://localhost:4000/users/add-appointment/${user.id}`,appointment)
+        
+    }
+
     return ( 
         <div className="doctor-card">
             <div className="doctor-info">
@@ -15,7 +24,7 @@ const DoctorCard = ({doctor}) => {
                 <p><strong>Clinic: </strong>{doctor.title}</p>
                 <p><strong>Clinic Phone: </strong>{doctor.clinic_phone}</p>
                 <div className="text-center">
-                    <button className="btn btn-primary">Set an appointment</button>
+                    <button className="btn btn-primary" onClick={()=>setAppointment(doctor.id)}>Set an appointment</button>
                 </div>
             </div>
             

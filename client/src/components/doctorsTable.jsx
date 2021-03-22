@@ -1,6 +1,17 @@
 import React from 'react';
+import axios from 'axios';
 
 const DoctorsTable = ({doctors}) => {
+
+
+    const removeDoctor = async(id)=>{
+       
+            await axios.delete(`http://localhost:4000/doctors/${id}`);
+          
+    }
+
+    
+
     return ( 
         <table className="table">
             <thead>
@@ -12,6 +23,7 @@ const DoctorsTable = ({doctors}) => {
                     <th>Phone</th>
                     <th>Type</th>
                     <th>Clinic</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +36,7 @@ const DoctorsTable = ({doctors}) => {
                         <td>{doctor.phone}</td>
                         <td>{doctor.type}</td>
                         <td>{doctor.title}</td>
+                        <td><button className="btn btn-primary" onClick={()=>{removeDoctor(doctor.id)}}>Delete</button></td>
                     </tr>
                 ))}
             </tbody>
